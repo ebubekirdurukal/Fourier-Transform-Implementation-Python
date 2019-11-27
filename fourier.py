@@ -17,19 +17,14 @@ def transform(x):
 			m+=x[t]*np.exp(-2*np.pi*1j*t*r/len(x))
 		y.append(m)
 	return y
-
 t=np.linspace(0,1,1000)#sampled at 1000 Hz
 freq=10
-f=np.sin(2*np.pi*freq*t)
-#f=np.square(2 * np.pi * freq * t)
+f=np.sin(2*np.pi*freq*t)+5*np.sin(2*np.pi*20*t)+np.sin(2*np.pi*25*t)+np.cos(2*np.pi*5*t)+np.cos(2*np.pi*15*t)
 p=transform(f)
 p=[j for j in p if j>0]#no negative frequencies
-fig,(ax1,ax2,ax3,ax4)=plt.subplots(1,4)
+fig,(ax1,ax2)=plt.subplots(1,2)
 ax1.plot(f)#input signal
-ax2.scatter(np.exp(-2*np.pi*1j*t).real,np.exp(-2*np.pi*1j*t).imag)#exponential
-ax3.scatter(f*np.exp(-2*np.pi*1j*t).real,f*np.exp(-2*np.pi*1j*t).imag)#transform's plot in coordinate system. Don't know why it seems weird.
-ax4.plot(p)#output
-
+ax2.plot(p)#output
 plt.show()
 
 
